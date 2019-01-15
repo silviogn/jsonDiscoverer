@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import jsondiscoverer.JsonSimpleDiscoverer;
 import jsondiscoverer.JsonSource;
+import jsondiscoverer.util.ModelHelper;
 
 /**
  * Test case for {@link JsonSimpleDiscoverer}
@@ -39,6 +40,22 @@ public class TestJsonSimpleDiscoverer {
 	 * 
 	 * @throws FileNotFoundException Thrown if the file is not found 
 	 */
+	
+	@Test
+	public void testNbaData() throws FileNotFoundException {
+		long ini = System.currentTimeMillis();
+		JsonSource source = new JsonSource("Nba");
+		source.addJsonData(null, new FileReader(new File("c://data//nbagamessmall.json")));
+		JsonSimpleDiscoverer discoverer = new JsonSimpleDiscoverer();
+		EPackage ePackage = discoverer.discover(source);
+		ModelHelper.saveEPackage(ePackage, new File("c://data//nbagamessmall.ecore"));
+		long fin = System.currentTimeMillis() - ini;		
+		System.out.println(fin);		
+	}
+	
+	
+	
+	
 	@Test
 	public void testDiscover() throws FileNotFoundException {
 		JsonSource source = new JsonSource("Stop");
