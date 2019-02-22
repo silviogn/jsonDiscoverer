@@ -41,6 +41,21 @@ public class TestJsonSimpleDiscoverer {
 	 * @throws FileNotFoundException Thrown if the file is not found 
 	 */
 	
+	
+	@Test 
+	public void executeExperiment() throws FileNotFoundException {
+		long ini = System.currentTimeMillis();
+		JsonSource source = new JsonSource("ds_0000");
+		
+		source.addJsonData(null, new FileReader(new File("c://data//experiment//ds_0000//ds_0000_jsondiscoverer.json")));
+		JsonSimpleDiscoverer discoverer = new JsonSimpleDiscoverer();
+		EPackage ePackage = discoverer.discover(source);
+		ModelHelper.saveEPackage(ePackage, new File("c://Users//silvi//Desktop//tmp//schemas//ds_0000.ecore"));
+		long fin = System.currentTimeMillis() - ini;		
+		System.out.println(fin);		
+	}
+	
+	
 	@Test
 	public void testNbaData() throws FileNotFoundException {
 		long ini = System.currentTimeMillis();
